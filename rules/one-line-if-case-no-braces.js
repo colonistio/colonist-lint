@@ -54,6 +54,25 @@ module.exports = {
                             }
                         })
                     }
+
+                    if(node.alternate && node.alternate.type !== "IfStatement" && node.alternate.type !== "BlockStatement") {
+                        context.report({
+                            node: node,
+                            messageId: "useBlocksWithElseCases",
+                            fix(fixer) {
+                                // assumes that other eslint rules will fix brace styling
+                                const sourceCode = context.getSourceCode();
+
+                                const firstValueToken = sourceCode.getFirstToken(node.alternate);
+                                const lastValueToken = sourceCode.getLastToken(node.alternate);
+
+                                return [
+                                    fixer.insertTextBefore(firstValueToken, "{"),
+                                    fixer.insertTextAfter(lastValueToken, "}")
+                                ];
+                            }
+                        })    
+                    }
                 }
             }
         };
