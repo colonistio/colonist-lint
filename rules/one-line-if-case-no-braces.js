@@ -35,6 +35,13 @@ module.exports = {
                             })
                         }
                     }
+                } else if(node.alternate || node.parent.type === "IfStatement") {
+                    if(node.consequent.type !== "BlockStatement") {
+                        context.report({
+                            node: node,
+                            messageId: "useBlocksWithElseCases",
+                        })
+                    }
                 }
             }
         };
