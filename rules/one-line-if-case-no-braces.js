@@ -19,6 +19,19 @@ module.exports = {
                             context.report({
                                 node: node,
                                 messageId: "noSingleLineIfsAsBlock",
+                                fix(fixer) {
+                                    const sourceCode = context.getSourceCode();
+
+                                    const openingBrace = sourceCode.getFirstToken(node.consequent);
+                                    const closingBrace = sourceCode.getLastToken(node.consequent);
+                                    const firstValueToken = sourceCode.getFirstToken(node.consequent.body[0]);
+                                    const lastValueToken = sourceCode.getLastToken(node.consequent.body[0]);
+
+                                    return [
+                                        fixer.removeRange([openingBrace.range[0], firstValueToken.range[0]]),
+                                        fixer.removeRange([lastValueToken.range[1], closingBrace.range[1]])
+                                    ];
+                                }
                             })
                         }
                     }
