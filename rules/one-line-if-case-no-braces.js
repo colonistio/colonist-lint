@@ -40,6 +40,18 @@ module.exports = {
                         context.report({
                             node: node,
                             messageId: "useBlocksWithElseCases",
+                            fix(fixer) {
+                                // assumes that other eslint rules will fix brace styling
+                                const sourceCode = context.getSourceCode();
+
+                                const firstValueToken = sourceCode.getFirstToken(node.consequent);
+                                const lastValueToken = sourceCode.getLastToken(node.consequent);
+
+                                return [
+                                    fixer.insertTextBefore(firstValueToken, "{"),
+                                    fixer.insertTextAfter(lastValueToken, "}")
+                                ];
+                            }
                         })
                     }
                 }
