@@ -1,5 +1,5 @@
 {
-    "name": "@colonist/colonist-lint",
+    "name": "@colonist/eslint-plugin-colonist",
     "version": "1.0.0",
     "description": "Specific linting rules",
     "main": "index.js",
