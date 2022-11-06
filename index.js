@@ -1,7 +1,7 @@
 const fs = require("fs")
 const path = require("path")
 
-const ruleFiles = fs.readdirSync("rules")
+const ruleFiles = fs.readdirSync(path.join(__dirname, "rules"))
 
 const configs = {
     all: {
