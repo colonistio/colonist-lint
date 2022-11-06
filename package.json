@@ -1,6 +1,6 @@
 {
     "name": "@colonist/eslint-plugin-colonist",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Specific linting rules",
     "main": "index.js",
     "dependencies": {
