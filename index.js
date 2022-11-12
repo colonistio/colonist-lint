@@ -1,13 +1,13 @@
 const fs = require("fs")
 const path = require("path")
 
-const ruleFiles = fs.readdirSync("rules")
+const ruleFiles = fs.readdirSync(path.join(__dirname, "rules"))
 
 const configs = {
     all: {
-        plugins: ["katan"],
+        plugins: ["@colonist/colonist"],
         rules: Object.fromEntries(ruleFiles.map(file => [
-            `katan/${path.basename(file, ".js")}`,
+            `@colonist/colonist/${path.basename(file, ".js")}`,
             "warn",
         ])),
     },
